@@ -13,3 +13,4 @@ data:
         roles: [{ role: 'readWrite', db: 'flask_db' }]
       })
     "
+

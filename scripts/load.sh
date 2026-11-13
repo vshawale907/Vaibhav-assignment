@@ -6,3 +6,4 @@ while true; do
   wget -qO- "$URL/" > /dev/null
   wget -qO- --post-data='{"load":"test"}' --header='Content-Type:application/json' "$URL/data" > /dev/null
 done
+

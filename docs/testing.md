@@ -134,3 +134,4 @@ kubectl get hpa -n flask-mongo
 ```
 
 TODO: paste output showing REPLICAS back at 2
+
