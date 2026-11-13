@@ -15,7 +15,7 @@ pip install -r requirements.txt
 python app.py
 ```
 
-The app reads `MONGO_HOST`, `MONGO_USER`, `MONGO_PASSWORD`, and `MONGO_DB` from the environment. When those are absent it falls back to localhost on port 27017 without authentication, which is enough to test the endpoints locally.
+The app reads `MONGO_HOST`, `MONGO_USER`, `MONGO_PASSWORD`, and `MONGO_DB` from the environment. When those are absent, pymongo receives `None` for the username and skips authentication, which is enough to test the endpoints locally against an unauthenticated MongoDB.
 
 ```
 curl http://localhost:5000/
@@ -28,15 +28,15 @@ curl http://localhost:5000/data
 
 ## Build and push the image
 
+Replace `your-dockerhub-username` with your Docker Hub username before running these commands and before deploying to Kubernetes. The same placeholder appears in `k8s/flask-deployment.yaml` line 21 and must be updated there too.
+
 ```
 docker build -t your-dockerhub-username/flask-mongodb-app:latest .
 docker login
 docker push your-dockerhub-username/flask-mongodb-app:latest
 ```
 
-Replace `your-dockerhub-username` in `k8s/flask-deployment.yaml` before deploying.
-
-If you want to avoid a push, load the image directly into Minikube and set `imagePullPolicy: Never` on the container:
+To skip a registry push, load the image directly into Minikube and set `imagePullPolicy: Never` on the container:
 
 ```
 minikube image load your-dockerhub-username/flask-mongodb-app:latest

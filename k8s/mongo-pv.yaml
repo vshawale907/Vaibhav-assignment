@@ -9,6 +9,9 @@ spec:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
   storageClassName: manual
+  claimRef:
+    namespace: flask-mongo
+    name: mongo-data-mongo-0
   hostPath:
     path: /data/mongo
     type: DirectoryOrCreate
